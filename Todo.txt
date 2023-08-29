@@ -1,0 +1,2 @@
+- Form validation
+- Käänteinen korko laskuri, jossa tavoite rahamäärä sijoitusajan lopussa
