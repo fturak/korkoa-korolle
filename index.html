@@ -12,21 +12,36 @@
     <meta name="copyright" content="Firas Turak Copyright 2023"> 
 
     <link rel="stylesheet" href="./styles.css">
-
+    
 </head>
     
 <body>
-    <h1>Korkoa korolle laskuri</h1>
-    <p>Alkupääoma =&nbsp;<input type="number" size="5" id="initialInvestment"></p>
-    <p>Kuukausisäästö =&nbsp;<input type="number" size="5" id="monthlyInvestment"></p>
-    <p>Vuosituotto-% =&nbsp;<input type="number" size="5" id="annualRate"></p>
-    <p>Sijoitusaika =&nbsp;<input type="number" size="5" id="years"></p>
-    <h3 id="result"><h3>
-    <input type="button" value="Laske" onclick="calculateFV()"><br><br>
-    <div id="chart_div"></div>
+    <nav>
+        <h1>KORKOA KOROLLE LASKURI</h1>    
+    </nav>
+    <main>
+        <div>
+            <form onsubmit="calculateFV(); return false">
+                <label>Alkupääoma: <input type="number" value=10 size="5" id="initialInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                <label>Kuukausisäästö: <input type="number" value=10 size="5" id="monthlyInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                <label>Vuosituotto-%: <input type="number" value=10 size="5" id="annualRate" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                <label>Sijoitusaika: <input type="number" value=10 size="5" id="years" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                <input type="submit" value="Laske">
+            </form>
+            <div>
+            <canvas id="chart"></canvas> 
+            <p id="result"></p>          
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Disclaimer:
+            Please note that these calculators are for illustrations only and do not represent actual returns.
+            Stock Market does not have a fixed rate of return and it is not possible to predict the rate of return.</p>
+    </footer>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./scripts/main.js"></script> 
 
 

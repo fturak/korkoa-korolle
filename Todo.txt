@@ -1,2 +1,2 @@
-- Form validation
+- pilkku laskut
 - Käänteinen korko laskuri, jossa tavoite rahamäärä sijoitusajan lopussa
