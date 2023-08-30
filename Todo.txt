@@ -1,2 +1,3 @@
 - pilkku laskut
 - Käänteinen korko laskuri, jossa tavoite rahamäärä sijoitusajan lopussa
+- Tallenna kuvana nappi

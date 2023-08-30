@@ -6,9 +6,9 @@
 
     <title>Korkoa korolle</title>
     <meta name="author" content ="Firas Turak">
-    <meta name="description" content="Laske korkoa korolle sekä muita sijoittamiseen liittyviä laskuja mutkattomasti ja ilman rajoituksia">
+    <meta name="description" content="Laske korkoa korolle mutkattomasti käyttäjäystävällisellä tavalla">
 
-    <meta name="language" content="finnish">
+    <meta name="language" content="fi">
     <meta name="copyright" content="Firas Turak Copyright 2023"> 
 
     <link rel="stylesheet" href="./styles.css">
@@ -21,23 +21,24 @@
     </nav>
     <main>
         <div>
-            <form onsubmit="calculateFV(); return false">
-                <label>Alkupääoma: <input type="number" value=10 size="5" id="initialInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                <label>Kuukausisäästö: <input type="number" value=10 size="5" id="monthlyInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                <label>Vuosituotto-%: <input type="number" value=10 size="5" id="annualRate" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                <label>Sijoitusaika: <input type="number" value=10 size="5" id="years" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                <input type="submit" value="Laske">
-            </form>
-            <div>
-            <canvas id="chart"></canvas> 
-            <p id="result"></p>          
+            <div id="calc-container">
+                <form name="values" onsubmit="validateForm(); return false">
+                    <label>Alkupääoma: <input name="initial" type="number" value=10 size="5" id="initialInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                    <label>Kuukausisäästö: <input name ="monthly" type="number" value=10 size="5" id="monthlyInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                    <label>Vuosituotto-%: <input name="return" type="number" value=10 size="5" id="annualRate" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                    <label>Sijoitusaika: <input name="duration" type="number" value=10 size="5" id="years" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
+                    <input type="submit" value="Laske">
+                </form>
+                <h3 id="result"></h3>  
+            </div>
+            <div id="canvas-container">
+                <canvas id="chart"></canvas> 
             </div>
         </div>
     </main>
     <footer>
-        <p>Disclaimer:
-            Please note that these calculators are for illustrations only and do not represent actual returns.
-            Stock Market does not have a fixed rate of return and it is not possible to predict the rate of return.</p>
+        <p><span style="color:white">Laskumenetelmät:</span> Laskuri laskee korkoa korolle noudattaen End of Month periaatetta, jos käyttäjä säästää kuukausittain. Tuotot on jaettu vuoden aikana 12 ja ne lisätään kuukauden lopussa. Silloin, kun käyttäjä ei syötä kuukausisäästöä korko tarkistetaan vuosittain.</p>
+        <p><span style="color:white">Vastuuvapauslauseke:</span> Laskuri on pelkkä kuvitus eikä se edusta oikeita tuottoja. Se ei ennusta osakemarkkinoiden tai tietyn sijoitustuotteen kehitystä. Kuvituksen sisältämät laskelmat perustuvat tietoon, jota olen pitänyt oikeana. En kuitenkaan takaa niiden tai sivuston esittämien tietojen virheettömyyttä. Mikään sivustolla esitetty tieto ei ole suositus sijoittaa mihinkään sijoitustuotteeseen.</p>
     </footer>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
