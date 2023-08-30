@@ -1,6 +1,9 @@
 const currency = "€"; // Could make this an input in future but may hinder UX with complexity
-const resultMessage = "Loppusumma: ";
 let compoundInterestArray = []; //Data types are defined by pushes
+
+const totalResultMessage = "Loppusumma: "
+const interestResultMessage = "Kokonaistuotto: "
+const investedResultMessage = "Kokonaissijoitus: "
 
 function validateForm() {
   const monthlyValue = document.forms["values"]["monthly"];
@@ -25,12 +28,18 @@ function calculateFV(){
     let annualRate = document.getElementById("annualRate").valueAsNumber;
     let years = document.getElementById("years").valueAsNumber;
 
-    const result = document.getElementById("result");
+    const totalResult = document.getElementById("total-result");
+    const interestResult = document.getElementById("interest-result");
+    const investedResult = document.getElementById("invested-result");
 
-    if(monthlyInvestment === "0") return resultMessage + 
-      (result.innerHTML = resultMessage + simpleRate(initialInvestment, annualRate, years).toFixed(2) + currency); //Make the input field always 0 if it is emptied
-    else return (result.innerHTML = resultMessage + 
-      compoundInterest(initialInvestment, monthlyInvestment, annualRate, years).toFixed(2) + currency);
+    if(monthlyInvestment === "0")
+      totalResult.innerHTML = totalResultMessage + simpleRate(initialInvestment, annualRate, years).toFixed(2) + currency;
+    else
+        totalResult.innerHTML = totalResultMessage + 
+        compoundInterest(initialInvestment, monthlyInvestment, annualRate, years).toFixed(2) + currency;
+
+    interestResult.innerHTML = interestResultMessage + compoundInterestArray[compoundInterestArray.length-1].interest.toFixed(2) + currency;
+    investedResult.innerHTML = investedResultMessage + compoundInterestArray[compoundInterestArray.length-1].invested.toFixed(2) + currency;
 }
 
 function simpleRate (investment, annualRate, years) {

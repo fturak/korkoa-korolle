@@ -29,7 +29,11 @@
                     <label>Sijoitusaika: <input name="duration" type="number" value=10 size="5" id="years" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
                     <input type="submit" value="Laske">
                 </form>
-                <h3 id="result"></h3>  
+                <div>
+                    <h3 id="invested-result"></h3> 
+                    <h3 id="interest-result"></h3>
+                    <h3 id="total-result"></h3>  
+                </div>
             </div>
             <div id="canvas-container">
                 <canvas id="chart"></canvas> 
@@ -38,7 +42,7 @@
     </main>
     <footer>
         <p><span style="color:white">Laskumenetelmät:</span> Laskuri laskee korkoa korolle noudattaen End of Month periaatetta, jos käyttäjä säästää kuukausittain. Tuotot on jaettu vuoden aikana 12 ja ne lisätään kuukauden lopussa. Silloin, kun käyttäjä ei syötä kuukausisäästöä korko tarkistetaan vuosittain.</p>
-        <p><span style="color:white">Vastuuvapauslauseke:</span> Laskuri on pelkkä kuvitus eikä se edusta oikeita tuottoja. Se ei ennusta osakemarkkinoiden tai tietyn sijoitustuotteen kehitystä. Kuvituksen sisältämät laskelmat perustuvat tietoon, jota olen pitänyt oikeana. En kuitenkaan takaa niiden tai sivuston esittämien tietojen virheettömyyttä. Mikään sivustolla esitetty tieto ei ole suositus sijoittaa mihinkään sijoitustuotteeseen.</p>
+        <p><span style="color:white">Vastuuvapauslauseke:</span> Laskuri on pelkkä kuvitus eikä se edusta oikeita tuottoja. Se ei ennusta osakemarkkinoiden tai tietyn sijoitustuotteen kehitystä. Kuvituksen sisältämät laskelmat perustuvat tietoon, jota pidän oikeana. En kuitenkaan takaa niiden tai sivuston esittämien tietojen virheettömyyttä. Mikään sivustolla esitetty tieto ei ole suositus sijoittaa mihinkään sijoitustuotteeseen.</p>
     </footer>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
