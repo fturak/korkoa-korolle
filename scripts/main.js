@@ -1,45 +1,45 @@
-const currency = "€"; // Could make this an input in future but may hinder UX with complexity
-let compoundInterestArray = []; //Data types are defined by pushes
+const currency = "€";
+let compoundInterestArray = []; //Data types are defined by the pushes post calc
 
-const totalResultMessage = "Loppusumma: "
-const interestResultMessage = "Kokonaistuotto: "
-const investedResultMessage = "Kokonaissijoitus: "
+const initialInvestment = document.forms["values"]["initial"];
+const monthlyInvestment = document.forms["values"]["monthly"];
+const years = document.forms["values"]["duration"];
+const annualRate = document.forms["values"]["return"];
+
+function inputFormat () {
+
+}
 
 function validateForm() {
-  const monthlyValue = document.forms["values"]["monthly"];
-  const durationValue = document.forms["values"]["duration"];
-  const returnValue = document.forms["values"]["return"];
+  if(years.valueAsNumber > 99) years.value = 99;
+  if(annualRate.valueAsNumber > 100) annualRate.value = 100;
 
-  if (durationValue.valueAsNumber > 99) {
-    alert("Maksimaalinen sijoitusaika on 99 vuotta");
-    return false;
-  }
-  if(returnValue.valueAsNumber > 100) {
-    alert("Maksimaalinen vuosituotto on 100%");
-    return false;
-  }
-  if(monthlyValue.value === "") monthlyValue.value = 0;
+  if(initialInvestment.value === "") initialInvestment.value = 0;
+  if(monthlyInvestment.value === "") monthlyInvestment.value = 0;
+  if(years.value === "") years.value = 1;
+  if(annualRate.value === "") annualRate.value = 0;
   calculateFV();
 }
 
 function calculateFV(){
-    let initialInvestment = document.getElementById("initialInvestment").valueAsNumber;
-    let monthlyInvestment = document.getElementById("monthlyInvestment").valueAsNumber;
-    let annualRate = document.getElementById("annualRate").valueAsNumber;
-    let years = document.getElementById("years").valueAsNumber;
+    compoundInterestArray = []; //Make sure it is reset
 
     const totalResult = document.getElementById("total-result");
     const interestResult = document.getElementById("interest-result");
     const investedResult = document.getElementById("invested-result");
 
+    const totalResultMessage = "Kokonaissumma: "
+    const interestResultMessage = "Kokonaistuotto: "
+    const investedResultMessage = "Kokonaissijoitus: "
+
     if(monthlyInvestment === "0")
-      totalResult.innerHTML = totalResultMessage + simpleRate(initialInvestment, annualRate, years).toFixed(2) + currency;
+      totalResult.innerHTML = totalResultMessage + simpleRate(initialInvestment.valueAsNumber, annualRate.valueAsNumber, years.valueAsNumber).toLocaleString("fi-FI") + currency;
     else
         totalResult.innerHTML = totalResultMessage + 
-        compoundInterest(initialInvestment, monthlyInvestment, annualRate, years).toFixed(2) + currency;
+        compoundInterest(initialInvestment.valueAsNumber, monthlyInvestment.valueAsNumber, annualRate.valueAsNumber, years.valueAsNumber).toLocaleString("fi-FI") + currency;
 
-    interestResult.innerHTML = interestResultMessage + compoundInterestArray[compoundInterestArray.length-1].interest.toFixed(2) + currency;
-    investedResult.innerHTML = investedResultMessage + compoundInterestArray[compoundInterestArray.length-1].invested.toFixed(2) + currency;
+    interestResult.innerHTML = interestResultMessage + compoundInterestArray[compoundInterestArray.length-1].interest.toLocaleString("fi-FI") + currency;
+    investedResult.innerHTML = investedResultMessage + compoundInterestArray[compoundInterestArray.length-1].invested.toLocaleString("fi-FI") + currency;
 }
 
 function simpleRate (investment, annualRate, years) {
@@ -72,13 +72,17 @@ function compoundInterest (initialInvestment, monthlyInvestment, annualRate, yea
     return accumulatedValue;
 }
 
+let chart;
+
  function doChart() { 
   const yearValues = compoundInterestArray.map(year => year.years)
   const interestValues = compoundInterestArray.map(year => year.interest.toFixed(2));
   const investedValues = compoundInterestArray.map(year => year.invested.toFixed(2));
   const accumulationValues = compoundInterestArray.map(year => year.accumulatedValue.toFixed(2));
   
-  const chart = new Chart("chart", {
+  if(chart != null) chart.destroy(); //need to destroy in chart js before redrawing or will cause exception
+
+  chart = new Chart("chart", {
     type: "bar",
     data: {
       labels: yearValues,
@@ -94,7 +98,7 @@ function compoundInterest (initialInvestment, monthlyInvestment, annualRate, yea
             data: interestValues
         },
         {
-            label: "Kokonaisarvo",
+            label: "Loppusumma",
             backgroundColor: "#009CA9",
             borderColor: "#009CA9",
             data: accumulationValues,
@@ -119,6 +123,11 @@ function compoundInterest (initialInvestment, monthlyInvestment, annualRate, yea
           },
           y: {
             stacked: true,
+            ticks: {
+              callback: (val) => {
+                return val.toLocaleString("fi-FI") + currency;
+              }
+            }
           }
         }
       }

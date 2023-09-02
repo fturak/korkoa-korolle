@@ -17,18 +17,18 @@
     
 <body>
     <nav>
-        <h1>KORKOA KOROLLE LASKURI</h1>    
+        <h1>Korkoa korolle laskuri</h1>    
     </nav>
     <main>
         <div>
             <div id="calc-container">
-                <form name="values" onsubmit="validateForm(); return false">
-                    <label>Alkupääoma: <input name="initial" type="number" value=10 size="5" id="initialInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                    <label>Kuukausisäästö: <input name ="monthly" type="number" value=10 size="5" id="monthlyInvestment" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                    <label>Vuosituotto-%: <input name="return" type="number" value=10 size="5" id="annualRate" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                    <label>Sijoitusaika: <input name="duration" type="number" value=10 size="5" id="years" onkeydown="return /[0-9/b/n]/i.test(event.key)"></label>
-                    <input type="submit" value="Laske">
+                <form name="values">
+                    <label>Alkupääoma: <input name="initial" type="number" value=10 id="initialInvestment"></label>
+                    <label>Kuukausisäästö: <input name ="monthly" type="number" value=10 id="monthlyInvestment"></label>
+                    <label>Vuosituotto-%: <input name="return" type="number" value=10 id="annualRate"></label>
+                    <label>Sijoitusaika: <input name="duration" type="number" pattern="[0-9]+" value=10 id="years"></label> 
                 </form>
+                <button onclick="validateForm()">Laske</button>
                 <div>
                     <h3 id="invested-result"></h3> 
                     <h3 id="interest-result"></h3>
@@ -41,13 +41,10 @@
         </div>
     </main>
     <footer>
-        <p><span style="color:white">Laskumenetelmät:</span> Laskuri laskee korkoa korolle noudattaen End of Month periaatetta, jos käyttäjä säästää kuukausittain. Tuotot on jaettu vuoden aikana 12 ja ne lisätään kuukauden lopussa. Silloin, kun käyttäjä ei syötä kuukausisäästöä korko tarkistetaan vuosittain.</p>
+        <p><span style="color:white">Laskumenetelmät:</span> Laskuri laskee korkoa korolle noudattaen End of Month periaatetta silloin, kun käyttäjä syöttää kuukausisäästön. Tällöin tuotot jaetaan vuoden aikana 12 ja kerrotaan olemassa olevan summan päälle. Jos käyttäjä ei syötä kuukausisäästöä korko tarkistetaan vuosittain.</p>
         <p><span style="color:white">Vastuuvapauslauseke:</span> Laskuri on pelkkä kuvitus eikä se edusta oikeita tuottoja. Se ei ennusta osakemarkkinoiden tai tietyn sijoitustuotteen kehitystä. Kuvituksen sisältämät laskelmat perustuvat tietoon, jota pidän oikeana. En kuitenkaan takaa niiden tai sivuston esittämien tietojen virheettömyyttä. Mikään sivustolla esitetty tieto ei ole suositus sijoittaa mihinkään sijoitustuotteeseen.</p>
     </footer>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="./scripts/main.js"></script> 
-
-
 </html>

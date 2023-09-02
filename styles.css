@@ -60,7 +60,7 @@ label {
 
 #calc-container {
     padding: 1rem;
-    width: 16rem;
+    width: 18rem;
 }
 
 #calc-container > div{
@@ -87,7 +87,7 @@ input {
     border: 1px solid var(--highlight-color);
 }
 
-input[type=submit] {
+button {
     width: 5rem;
     margin-top: 1rem;
     padding:5px 15px; 
